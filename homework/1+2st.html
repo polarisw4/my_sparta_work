@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>승우 쇼핑몰</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Pen+Script&display=swap"
+        rel="stylesheet">
+    <!-- jq 연결 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style>
+        /* 승우몰 진물_세로 가운데 정렬  */
+        .mytitle {
+            margin: 10px auto;
+            padding: 10px 0px 50px 0px;
+            color: white;
+            width: 200px;
+            height: 40px;
+            background-image: url('https://www.ancient-origins.net/sites/default/files/field/image/Doric-Temple.jpg');
+            background-position: center;
+            background-size: cover;
+
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Nanum Gothic', sans-serif;
+        }
+
+        .subtitle {
+            margin-top: 0px;
+            color: blue;
+        }
+
+        /* 자동차사진_사진*/
+        .wrap {
+            width: 800px;
+            height: 400px;
+            margin: auto;
+        }
+
+        .product1 {
+            margin: 10px auto;
+            color: white;
+            width: 800px;
+            height: 400px;
+            background-position: center;
+            background-size: cover;
+            background-image: url('https://t1.daumcdn.net/cfile/tistory/266504385713BA2E32')
+        }
+
+        .btn-warning {
+            background-color: blue;
+        }
+
+        .p2 {
+            display: inline;
+        }
+    </style>
+
+    <script>
+
+        function oder() {
+
+            let name = $('#oder_name').val();
+            let num = $('#oder_num').val();
+            let ad = $('#oder_ad').val();
+            let call = $('#oder_call').val();
+
+            if (name == "") {
+                alert("이름을 적어주세요");
+            } else if (num == "") {
+                alert("수량을 적어주세요");
+            } else if (ad == "") {
+                alert("주소를 적어주세요");
+            } else if (call == "") {
+                alert("전화번호를 적어주세요");
+            } else {
+                alert("주문을 입력해 주세요.");
+            }
+        }
+
+       $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {},                
+                success: function (response) {
+                console.log(response)
+                    let exrate = response[1]["rate"]
+                    console.log(exrate)
+                    $('#ExchangeRate').text(exrate);
+                }
+            })
+       })
+
+    </script>
+</head>
+
+<body>
+    <div class="mytitle">
+        <h1 style="margin-bottom:3px;">승우몰</h1>
+        <h5 style="margin-top:1px; color:blue;">없는 것 빼고, 다 있음</h5>
+    </div>
+
+    <div class="product1">
+    </div>
+    </div>
+    <div class="wrap">
+        <div class="p2">
+            <p>
+            <h1 class="p2">상품설명 </h1><span> 가격: 1,000,000원</span>
+            </p>
+            <p>
+            <h3> 하늘 빛을 담은 최고급 차로 당신의 꿈을 이루어 줄 것 입니다. </h3>
+            </p>
+            <p style="color:red"> 오늘의 환율 : <text id="ExchangeRate" > </text></p>
+            </ul>
+        </div>
+        <div id="oder-club">
+            <h1>주문하기</h1>
+            <p>
+                주문자: <input id="oder_name" type="text" />
+            </p>
+            <p>
+                수량: <input id="oder_num" type="number" min="0" max="10" />
+            </p>
+            <p>
+                주소: <input id="oder_ad" type="text" />
+            </p>
+            <p>
+                전화번호: <input id="oder_call" type="text" />
+            </p>
+        </div>
+        <button class="btn-warning" onclick="oder()" type="button"
+            style="color:white; font-weight:bolder; font-size:larger;">주문하기</button>
+    </div>
+
+</body>
+
+</html>
